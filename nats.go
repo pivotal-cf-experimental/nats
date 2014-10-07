@@ -17,6 +17,7 @@ import (
 	"net/url"
 	"regexp"
 	"runtime"
+	"runtime/debug"
 	"strconv"
 	"strings"
 	"sync"
@@ -1467,6 +1468,8 @@ func (nc *Conn) clearPendingFlushCalls() {
 // will be triggered. The lock should not be held entering this
 // function. This function will handle the locking manually.
 func (nc *Conn) close(status Status, doCBs bool) {
+	debug.PrintStack()
+
 	nc.mu.Lock()
 	if nc.isClosed() {
 		nc.status = status
