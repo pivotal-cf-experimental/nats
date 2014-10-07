@@ -1049,6 +1049,7 @@ func (nc *Conn) LastError() error {
 func (nc *Conn) processErr(e string) {
 	// FIXME(dlc) - process Slow Consumer signals special.
 	nc.err = errors.New("nats: " + e)
+	println("processErr", nc.err.Error())
 	nc.Close()
 }
 
